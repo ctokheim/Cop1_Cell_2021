@@ -1,0 +1,163 @@
+---
+############################################################
+#                   Data information                       #
+############################################################
+
+ref: ref.yaml
+assembly: mm10 #hg38 or mm10
+
+cancer_type: AUTO #short name of cancer type
+metasheet: metasheet.txt
+designs: [Condition] #the column from metasheet which is used to do comparsion
+
+############################################################
+#                     Data Processing                      #
+############################################################
+
+### star 
+#Possible values are [ff-firststrand, ff-secondstrand, ff-unstranded, fr-firststrand, fr-secondstrand, fr-unstranded (default), transfrags]
+library_type: 'fr-unstranded'
+stranded: false
+threads: 8
+
+### rseqc parameters
+rseqc_ref: house_keeping  #rseqc ref model
+
+############################################################
+#             Differential Gene Expression                 #
+############################################################
+
+
+### batch_removal and PCA analysis
+#If you don't need to do batch removal, just setting [no] 
+batch_covariates: [Batch]
+
+neoantigen_callers: "NetMHC"
+neoantigen_epitope_lengths: "8,9,10,11"
+
+### deseq2
+batch: [Batch] #[Clinical Phenotype] or [no], Clinical phenotype could be the column from metasheet which accounts for batch effect
+comparison: between ##between or loop. between: compare any two phenotypes in a given condition column;loop: compare one phenotype and all the others 
+
+############################################################
+#                       level3                             #
+############################################################
+
+### microbiota
+centrifuge: true  #run centrifuge or pathseq
+
+### Trust4
+trust4_clinical_phenotype: [Condition]
+
+### arcasHLA
+##specifying group imformation annotated in HLA oncoplot
+hla_annot_group: [Responder, Gender]
+
+############################################################
+#                     list samples                         #
+############################################################
+samples:
+  4T1_Rosa26_R1:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s1_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s1_2.fq.gz
+  4T1_Rosa26_R2:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s7_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s7_2.fq.gz
+  4T1_Cop1KoSg1_R1:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s2_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s2_2.fq.gz
+  4T1_Cop1KoSg1_R2:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s8_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s8_2.fq.gz
+  4T1_Cop1KoSg2_R1:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s3_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s3_2.fq.gz
+  4T1_Cop1KoSg2_R2:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s9_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1ko/s9_2.fq.gz
+  4T1_Rosa26_IFNg_R1:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s4_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s4_2.fq.gz
+  4T1_Rosa26_IFNg_R2:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s10_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s10_2.fq.gz
+  4T1_Cop1KoSg1_IFNg_R1:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s5_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s5_2.fq.gz
+  4T1_Cop1KoSg1_IFNg_R2:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s11_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s11_2.fq.gz
+  4T1_Cop1KoSg2_IFNg_R1:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s6_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s6_2.fq.gz
+  4T1_Cop1KoSg2_IFNg_R2:
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s12_1.fq.gz
+    - /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_cop1_ko_ifn/s12_2.fq.gz
+  #4T1_WT_R1:
+    #- /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_wt/s13_1.fq.gz
+    #- /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_wt/s13_2.fq.gz
+  #4T1_WT_R2:
+    #- /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_wt/s14_1.fq.gz
+    #- /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_wt/s14_2.fq.gz
+  #4T1_WT_IFNg_R1:
+    #- /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_wt/s15_1.fq.gz
+    #- /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_wt/s15_2.fq.gz
+  #4T1_WT_IFNg_R2:
+    #- /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_wt/s16_1.fq.gz
+    #- /liulab/ctokheim/projects/cop1_cebpd_ko_rna_seq/raw_data/cop1_ko/4t1_wt/s16_2.fq.gz
+  4T1_Rosa26_R3:
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A1/A1_1.fq.gz
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A1/A1_2.fq.gz
+  4T1_CebpdKoSg1_R1:
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A2/A2_1.fq.gz
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A2/A2_2.fq.gz
+  #4T1_CebpdKoSg2_R1:
+    #- /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A3/A3_1.fq.gz
+    #- /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A3/A3_2.fq.gz
+  4T1_Rosa26_IFNg_R3:
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A4/A4_1.fq.gz
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A4/A4_2.fq.gz
+  4T1_CebpdKoSg1_IFNg_R1:
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A5/A5_1.fq.gz
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A5/A5_2.fq.gz
+  #4T1_CebpdKoSg2_IFNg_R1:
+    #- /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A6/A6_1.fq.gz
+    #- /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A6/A6_2.fq.gz
+  4T1_Rosa26_R4:
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A7/A7_1.fq.gz
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A7/A7_2.fq.gz
+  4T1_CebpdKoSg1_R2:
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A8/A8_1.fq.gz
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A8/A8_2.fq.gz
+  #4T1_CebpdKoSg2_R2:
+    #- /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A9/A9_1.fq.gz
+    #- /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A9/A9_2.fq.gz
+  4T1_Rosa26_IFNg_R4:
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A10/A10_1.fq.gz
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A10/A10_2.fq.gz
+  4T1_CebpdKoSg1_IFNg_R2:
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A11/A11_1.fq.gz
+    - /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A11/A11_2.fq.gz
+  #4T1_CebpdKoSg2_IFNg_R2:
+    #- /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A12/A12_1.fq.gz
+    #- /liulab/sgu/2021-03_Cebpd_KO/usftp21.novogene.com/raw_data/A12/A12_2.fq.gz
+
+###########################################################
+#                      run settings                       #
+###########################################################
+runs:
+  run1:
+    - SRR8281228
+  run3:
+    - SRR8281222
+  run4:
+    - SRR8281224
+  run5:
+    - SRR8281225
+  run6:
+    - SRR8281218
+  run7:
+    - SRR8281219
+  run8:
+    - SRR8281220
+

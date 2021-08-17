@@ -1,0 +1,23 @@
+##level1
+star: true
+salmon: true
+rseqc: true
+##level2
+batch_removal: true
+deseq2: false
+gsea: false
+ssgsea: false
+##level3
+microbiota: false
+trust4: false
+arcasHLA: false
+pvacseq: false
+##level4
+immunedeconv: false
+mMCP: false
+##level5
+msisensor2: false
+##Report
+report: false
+
+

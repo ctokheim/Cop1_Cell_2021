@@ -1,0 +1,100 @@
+#NOTE: you won't typically have to change the following two lines!
+metasheet: 'metasheet.csv'
+ref: "cidc_chips/ref.yaml"
+
+trim_adapter: true
+#Where you want to store your results
+#NOTE: you could comment this line, the default path is "analysis"
+output_path: "analysis"
+
+#Tell us what assembly to use (!! MUST be defined in chips/ref.yaml !!)
+assembly: mm10
+
+#ALIGNER: if you have sentieon license and got sentieon installed on your machine
+#Uncomment the following line and set absolute path of sentieon
+#This software could speed up your alignment
+#sentieon: "/path/to/sentieon"
+
+#CUTOFF: Some results show that long reads do not make sense in peaks calling
+#Change the number to set the cutoff
+#
+#To skip filtering, set cutoff 0 or leave it as blank
+cutoff: 150
+
+
+# PEAKS CALLING: Call broad peaks for some factors
+# This parameter will disable motif finding modules(whatever you set or not set motif)
+# Uncomment below line and set value as true
+#macs2_broadpeaks: false
+
+
+# for narrowpeak calling, extra parameters passed to macs2.
+# e.g, --nomodel.  --nomodel is turned on for broad peaks by default,  
+# for narrowpeak, has to modify the below parameter.
+#macs_extra_param:
+
+#MOTIF CALLER: if you want to use MDSeqPos, set your aligner as 'mdseqpos'
+#OTHERWISE leave it as 'homer' (default)
+#
+#To skip motif scanning, simply comment out BOTH lines
+motif: 'homer'
+#motif: 'mdseqpos'
+
+contamination_pannel_qc: true
+
+#NOTE: CNV analysis using QDNAseq R pkg- {true, false}
+cnv_analysis: true
+
+#Uncomment and set to 'SNAP', 'CAP', or 'KACYL' for your type of epicypher
+#spike-ins
+#default: 'SNAP'
+#epicypher_analysis: 'SNAP'
+
+# FOR CISTROME DATABASE TEAM:
+# Uncomment it to enable json and cistrome modules
+# This will bulid a adapter for Cistrome DB at {Cistrome_path}
+# Cistrome_path is optional, the default path is {output_path}/cistrome
+# CistromeApi: true
+# Cistrome_path: "analysis/cistrome"
+
+# DEFINE the samples- each sample should have a name, e.g. SAMPLE1
+# and a path to the input file, e.g. data/sample1.fastq.gz
+# VALID INPUTS: fastq, fastq.gz, bam
+# NOTE: for PAIRED-END fastq/fastq.gz, give both pairs to the sample:
+# SAMPLE_1_PE:
+#   - data/sample1_pair1.fastq
+#   - data/sample1_pair2.fastq
+# WARNING: DO not mix Paired-END and Single-End samples!!!
+# ALSO: having the string "rep" or '.' in your sample name will throw an ERROR
+# '.' causes Rscripts chop off names; and it's used as replicate splitter
+samples:
+  WT_R1:
+    - data/4T1/B1/B1_CKDL200159726-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/B1/B1_CKDL200159726-1a_HC7VYBBXX_L6_2.fq.gz
+  WT_R2:
+    - data/4T1/B2/B2_CKDL200159727-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/B2/B2_CKDL200159727-1a_HC7VYBBXX_L6_2.fq.gz
+  WT_R3:
+    - data/4T1/B3/B3_CKDL200159728-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/B3/B3_CKDL200159728-1a_HC7VYBBXX_L6_2.fq.gz
+  WT_R4:
+    - data/4T1/B4/B4_CKDL200159729-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/B4/B4_CKDL200159729-1a_HC7VYBBXX_L6_2.fq.gz
+  ROSA_R1:
+    - data/4T1/B5/B5_CKDL200159730-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/B5/B5_CKDL200159730-1a_HC7VYBBXX_L6_2.fq.gz
+  ROSA_R2:
+    - data/4T1/B6/B6_CKDL200159731-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/B6/B6_CKDL200159731-1a_HC7VYBBXX_L6_2.fq.gz
+  COP1_KO_sgRNA2_R1:
+    - data/4T1/B7/B7_CKDL200159732-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/B7/B7_CKDL200159732-1a_HC7VYBBXX_L6_2.fq.gz
+  COP1_KO_sgRNA2_R2:
+    - data/4T1/B8/B8_CKDL200159733-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/B8/B8_CKDL200159733-1a_HC7VYBBXX_L6_2.fq.gz
+  COP1_KO_sgRNA1_R1:
+    - data/4T1/C1/C1_CKDL200159734-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/C1/C1_CKDL200159734-1a_HC7VYBBXX_L6_2.fq.gz
+  COP1_KO_sgRNA1_R2:
+    - data/4T1/C2/C2_CKDL200159735-1a_HC7VYBBXX_L6_1.fq.gz
+    - data/4T1/C2/C2_CKDL200159735-1a_HC7VYBBXX_L6_2.fq.gz
