@@ -16,8 +16,6 @@ Put `bam` files, `bigwig` files, and `peak` files to the corresponding folders:
 
 Change working directory to `script` directory
 
-## Running the code:
-
 ``` bash
 bash run_pipeline.sh
 ``` 
